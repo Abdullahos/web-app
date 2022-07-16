@@ -39,12 +39,12 @@ public class BillController {
         Meter meter = meterMono.block().getBody();
         Bill bill = new Bill(user,
                              meter.getEnergyDebt(),
-                            meter.getDebt()*100,
+                            meter.getDebt(),
                             lastPaymentDate
                             );
         model.addAttribute("bill",bill);
         model.addAttribute("userId", user.getId());
-        model.addAttribute("amount", (int)(meter.getDebt()*100)); // in cents
+        model.addAttribute("amount", (int)(meter.getDebt()*1)); // in cents
         model.addAttribute("stripePublicKey", stripePublicKey);
         model.addAttribute("currency", ChargeRequest.Currency.EUR);
         return "bill";
